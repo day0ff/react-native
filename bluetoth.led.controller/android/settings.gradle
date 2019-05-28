@@ -1,0 +1,5 @@
+rootProject.name = 'bluetoth_led_controller'
+include ':react-native-bluetooth-serial'
+project(':react-native-bluetooth-serial').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-bluetooth-serial/android')
+
+include ':app'
