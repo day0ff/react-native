@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 import CroppedButton from '../CroppedButton';
 
@@ -32,7 +32,6 @@ class Controls extends Component {
 
 const styles = StyleSheet.create({
     controls: {
-        // backgroundColor: 'blue',
         width: '40%',
         justifyContent: 'space-between'
     },

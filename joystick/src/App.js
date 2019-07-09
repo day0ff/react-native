@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 import Cross from './components/cross/Cross';
 import Buttons from './components/buttons/Buttons';

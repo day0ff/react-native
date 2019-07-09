@@ -36,7 +36,6 @@ class Buttons extends Component {
 
 const styles = StyleSheet.create({
     buttons: {
-        // backgroundColor: 'green',
         width: '30%',
         marginBottom: '5%',
         alignSelf: 'flex-end',

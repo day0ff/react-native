@@ -40,7 +40,6 @@ class Cross extends Component {
 
 const styles = StyleSheet.create({
     cross: {
-        // backgroundColor: 'red',
         width: '30%',
         marginBottom:'5%',
         alignSelf:'flex-end',
