@@ -1,4 +1,4 @@
-const JOYSTICK_BUTTONS_SPRITES = require('../images/joystick-buttons-sprites.png');
+import JOYSTICK_BUTTONS_SPRITES from '../images/joystick-buttons-sprites.png';
 
 export const BUTTONS_SPRITES = {
     SQUARE_OFF: {
