@@ -1,9 +1,14 @@
 import React, {Component} from 'react';
-import { StyleSheet, View} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+
 import { TriangleColorPicker } from 'react-native-color-picker'
 
+class ColorPicker extends Component {
 
-export default class App extends Component {
+    constructor() {
+        super();
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -16,6 +21,7 @@ export default class App extends Component {
             </View>
         );
     }
+
 }
 
 const styles = StyleSheet.create({
@@ -26,7 +32,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     colorPicker:{
-      width:'70%',
-      height:'70%'
+        width:'70%',
+        height:'70%'
     }
 });
+
+export default ColorPicker;
