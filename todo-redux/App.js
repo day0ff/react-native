@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
     SafeAreaView,
     StyleSheet,
@@ -11,18 +12,19 @@ import {
     View
 } from 'react-native';
 
+import { addTodo, deleteTodo } from './actions/todo';
 
 class App extends Component {
     constructor() {
         super();
         this.state = {
-            text: null,
-            toDos: [{title: "Do homework."}, {title: "By new stuffs."}]
+            todo: null,
+            toDos: []
         }
     }
 
     addTodo = () => {
-        this.setState(({text, toDos}) => ({toDos: [...toDos, {title: text}], text: null}));
+        this.setState(({todo, toDos}) => ({toDos: [...toDos, {title: todo}]}));
         Keyboard.dismiss();
     };
 
@@ -61,4 +63,21 @@ const styles = StyleSheet.create({
     }
 });
 
-export default App;
+const mapStateToProps = state => {
+    return {
+        ToDos: state.toDos
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addTodo: todo => {
+            dispatch(addTodo(todo))
+        },
+        deleteTodo: index => {
+            dispatch(deleteTodo(index))
+        }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
