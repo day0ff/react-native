@@ -12,24 +12,19 @@ import {
     View
 } from 'react-native';
 
-import { addTodo, deleteTodo } from './actions/todo';
+import { addTodo, deleteTodo } from './store/actions/todo';
 
 class App extends Component {
-    constructor() {
-        super();
-        this.state = {
-            todo: null,
-            toDos: []
-        }
-    }
+    state = {text: null};
 
     addTodo = () => {
-        this.setState(({todo, toDos}) => ({toDos: [...toDos, {title: todo}]}));
+        this.props.addTodo(this.state.text);
+        this.setState({text: null});
         Keyboard.dismiss();
     };
 
     deleteTodo = index => {
-        this.setState(({toDos}) => ({toDos: [...toDos.filter((todo, todoIndex) => todoIndex !== index)]}));
+        this.props.deleteTodo(index);
     };
 
     render() {
@@ -40,12 +35,12 @@ class App extends Component {
                            value={this.state.text}
                            blurOnSubmit={true}/>
                 <Button title="ADD" onPress={this.addTodo}/>
-                <FlatList data={this.state.toDos}
+                <FlatList data={this.props.toDos}
                           keyExtractor={({item, index}) => (index)}
                           renderItem={({item, index}) => (
                               <TouchableOpacity onPress={() => this.deleteTodo(index)}>
                                   <View>
-                                      <Text>{index} {item.title}</Text>
+                                      <Text>{index + 1} {item.title}</Text>
                                   </View>
                               </TouchableOpacity>)}
                 />
@@ -63,11 +58,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapStateToProps = state => {
-    return {
-        ToDos: state.toDos
-    }
-};
+const mapStateToProps = state => ({toDos: state.todoReducer.toDos});
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -80,4 +71,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App);
