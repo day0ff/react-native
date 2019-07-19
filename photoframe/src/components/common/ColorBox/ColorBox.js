@@ -4,10 +4,6 @@ import {StyleSheet, TouchableOpacity, View, Text} from 'react-native';
 
 class ColorBox extends Component {
 
-    constructor() {
-        super();
-    }
-
     render() {
         return (
             <TouchableOpacity style={[styles.colorBox, {width: this.props.width, height: this.props.width}]}>

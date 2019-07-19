@@ -1,20 +1,28 @@
-import React, {Component} from 'react';
-import {View, StyleSheet} from 'react-native';
+import React, { Component } from 'react';
+import { View, StyleSheet } from 'react-native';
 
-import Menu from './Menu';
-import Palette from './Palette';
-import Frame from './Frame';
-import Controls from './Controls';
+import Menu from './components/Menu/Menu';
+import Palette from './components/Palette/Palette';
+import PhotoFrame from './components/PhotoFrame/PhotoFrame';
+import Controls from './components/Controls/Controls';
 
 
 export default class App extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Menu style={styles.section}/>
-                <Palette style={styles.section}/>
-                <Frame style={styles.section}/>
-                <Controls style={styles.section}/>
+                <View style={[styles.section]}>
+                    <Menu/>
+                </View>
+                <View style={[styles.section, styles.palette]}>
+                    <Palette/>
+                </View>
+                <View style={[styles.section, styles.photoFrame]}>
+                    <PhotoFrame/>
+                </View>
+                <View style={[styles.section]}>
+                    <Controls/>
+                </View>
             </View>
         );
     }
@@ -26,11 +34,16 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignContent: 'center',
         backgroundColor: '#fff',
-        height:'100%'
+        height: '100%'
     },
     section: {
-        height:'10%',
-        justifyContent: 'space-evenly',
+        height: '10%',
         borderWidth: 1,
+    },
+    palette: {
+        height: '20%',
+    },
+    photoFrame: {
+        height: '60%',
     }
 });

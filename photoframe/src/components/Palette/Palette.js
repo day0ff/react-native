@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 class Palette extends Component {
 
@@ -13,7 +13,6 @@ class Palette extends Component {
             <View style={[this.props.style, styles.palette]}>
                 <Text>Palette</Text>
                 <Text>Palette</Text>
-                <Text>Palette</Text>
             </View>
         );
     }
@@ -24,7 +23,10 @@ const styles = StyleSheet.create({
     palette: {
         display: 'flex',
         flexDirection: 'row',
-        height:'20%',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        width:'100%',
+        height:'100%',
     },
 });
 
