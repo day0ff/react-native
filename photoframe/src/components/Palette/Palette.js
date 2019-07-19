@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import ColorPalette from '../common/ColorPalette/ColorPalette';
 
 class Palette extends Component {
 
@@ -11,8 +12,10 @@ class Palette extends Component {
     render() {
         return (
             <View style={[this.props.style, styles.palette]}>
-                <Text>Palette</Text>
-                <Text>Palette</Text>
+                <View style={styles.colorPalette}>
+                    <ColorPalette/>
+                </View>
+                <View style={styles.currentColorBox}/>
             </View>
         );
     }
@@ -25,8 +28,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-evenly',
-        width:'100%',
-        height:'100%',
+        width: '100%',
+        height: '100%',
+    },
+    colorPalette: {
+        width: '70%',
+        height: '80%',
+        borderWidth: 1,
+    },
+    currentColorBox: {
+        width: '20%',
+        height: '80%',
+        borderWidth: 1,
+        backgroundColor: '#FF0',
     },
 });
 

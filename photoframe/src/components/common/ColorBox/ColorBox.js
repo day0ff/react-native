@@ -1,12 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-import {StyleSheet, TouchableOpacity, View, Text} from 'react-native';
+import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 
 class ColorBox extends Component {
 
     render() {
         return (
-            <TouchableOpacity style={[styles.colorBox, {width: this.props.width, height: this.props.width}]}>
+            <TouchableOpacity style={[styles.colorBox, {width: this.props.size, height: this.props.size}]}
+                              onPress={this.props.onPress}
+                              onLongPress={this.props.onLongPress}>
                 <View>
                     <Text>{this.props.children}</Text>
                 </View>
