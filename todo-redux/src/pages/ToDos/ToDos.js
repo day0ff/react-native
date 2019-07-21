@@ -22,6 +22,10 @@ class ToDos extends Component {
         Keyboard.dismiss();
     };
 
+    openModal = (index) => {
+        this.props.navigation.navigate('details', {index});
+    };
+
     deleteTodo = index => {
         this.props.deleteTodo(index);
     };
@@ -46,7 +50,7 @@ class ToDos extends Component {
                           data={this.props.toDos}
                           keyExtractor={({item, index}) => (index)}
                           renderItem={({item, index}) => (
-                              <TouchableOpacity onPress={() => this.deleteTodo(index)}>
+                              <TouchableOpacity onPress={() => this.openModal(index)}>
                                   <View>
                                       <Text>{index + 1} {item.title}</Text>
                                   </View>
@@ -74,7 +78,7 @@ const styles = StyleSheet.create({
     newTodoContainer: {
         display: 'flex',
         flexDirection: 'row',
-        margin:15,
+        margin: 15,
     },
     textInput: {
         borderWidth: 1,
@@ -84,8 +88,7 @@ const styles = StyleSheet.create({
         paddingRight: 8,
         marginRight: 3,
     },
-    flatList: {
-    }
+    flatList: {}
 });
 
 const mapStateToProps = state => ({toDos: state.todoReducer.toDos});
