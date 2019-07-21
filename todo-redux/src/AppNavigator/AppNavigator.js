@@ -4,11 +4,10 @@ import Home from '../pages/Home/Home';
 import ToDos from '../pages/ToDos/ToDos';
 import Modal from '../pages/Modal/Modal';
 
-
-const ModalNavigator = createStackNavigator(
+const StackNavigator = createStackNavigator(
     {
-        todos: ToDos,
-        details: Modal
+        todos: {screen: ToDos},
+        details: {screen: Modal,}
     },
     {
         initialRouteName: 'todos',
@@ -18,7 +17,7 @@ const ModalNavigator = createStackNavigator(
 const AppNavigator = createBottomTabNavigator(
     {
         home: Home,
-        todos: ModalNavigator
+        todos: StackNavigator,
     },
     {
         initialRouteName: 'home',

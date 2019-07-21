@@ -6,7 +6,7 @@ import { deleteTodo } from '../../store/actions/todo';
 
 class Modal extends Component {
     static navigationOptions = {
-        title: 'Details',
+        title: 'Details Page',
     };
 
     deleteTodo = index => {
@@ -15,12 +15,13 @@ class Modal extends Component {
     };
 
     render() {
-        const index = this.props.navigation.getParam('index');
+        const index = this.props.navigation.getParam('index', 0);
         return (
             <View style={styles.container}>
                 <Text style={styles.header}>Modal Page</Text>
-                <Text>{index + 1}. {this.props.toDos[index].title}</Text>
+                <Text>{index + 1}. {this.props.toDos[index] ? this.props.toDos[index].title : ''}</Text>
                 <Button onPress={() => this.deleteTodo(index)} title="Delete"/>
+                <Button title="Go back" onPress={() => this.props.navigation.goBack()}/>
             </View>
         )
     }

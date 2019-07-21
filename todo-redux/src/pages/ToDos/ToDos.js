@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
 import {
     StyleSheet,
@@ -11,10 +12,29 @@ import {
     View
 } from 'react-native';
 
-import { addTodo, deleteTodo } from '../../store/actions/todo';
+import { addTodo } from '../../store/actions/todo';
+import { loadStorage, updateStorage } from '../../store/actions/storage';
+
+export const TODO_STORE = 'todo_store';
 
 class ToDos extends Component {
+    static navigationOptions = {
+        title: 'TODO Page',
+    };
+
     state = {text: null};
+
+    componentDidMount() {
+        AsyncStorage.getItem(TODO_STORE)
+            .then(value => this.props.loadStorage(JSON.parse(value)))
+            .catch(() => ({}));
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.toDos.length !== this.props.toDos.length) {
+            this.props.updateStorage(TODO_STORE, {toDos: this.props.toDos});
+        }
+    }
 
     addTodo = () => {
         this.props.addTodo(this.state.text);
@@ -26,18 +46,10 @@ class ToDos extends Component {
         this.props.navigation.navigate('details', {index});
     };
 
-    deleteTodo = index => {
-        this.props.deleteTodo(index);
-    };
-
     render() {
         return (
             <View style={styles.container}>
                 <Text style={styles.header}>ToDos Page</Text>
-                <Button
-                    title="Go back"
-                    onPress={() => this.props.navigation.goBack()}
-                />
                 <View style={styles.newTodoContainer}>
                     <TextInput style={styles.textInput}
                                placeholder="describe new TODO"
@@ -95,12 +107,15 @@ const mapStateToProps = state => ({toDos: state.todoReducer.toDos});
 
 const mapDispatchToProps = dispatch => {
     return {
+        loadStorage: key => {
+            dispatch(loadStorage(key))
+        },
+        updateStorage: (key, value) => {
+            dispatch(updateStorage(key, value))
+        },
         addTodo: todo => {
             dispatch(addTodo(todo))
         },
-        deleteTodo: index => {
-            dispatch(deleteTodo(index))
-        }
     }
 };
 
