@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
+
+import { addTodo } from '../../store/actions/todo';
+import { loadStorage, updateStorage } from '../../store/actions/storage';
+
 import {
     StyleSheet,
     TextInput,
@@ -12,9 +15,6 @@ import {
     View
 } from 'react-native';
 
-import { addTodo } from '../../store/actions/todo';
-import { loadStorage, updateStorage } from '../../store/actions/storage';
-
 export const TODO_STORE = 'todo_store';
 
 class ToDos extends Component {
@@ -25,9 +25,7 @@ class ToDos extends Component {
     state = {text: null};
 
     componentDidMount() {
-        AsyncStorage.getItem(TODO_STORE)
-            .then(value => this.props.loadStorage(JSON.parse(value)))
-            .catch(() => ({}));
+        this.props.loadStorage(TODO_STORE);
     }
 
     componentDidUpdate(prevProps) {
@@ -108,10 +106,10 @@ const mapStateToProps = state => ({toDos: state.todoReducer.toDos});
 const mapDispatchToProps = dispatch => {
     return {
         loadStorage: key => {
-            dispatch(loadStorage(key))
+            dispatch(loadStorage(key));
         },
         updateStorage: (key, value) => {
-            dispatch(updateStorage(key, value))
+            dispatch(updateStorage(key, value));
         },
         addTodo: todo => {
             dispatch(addTodo(todo))

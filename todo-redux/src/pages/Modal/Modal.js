@@ -46,9 +46,6 @@ const mapStateToProps = state => ({toDos: state.todoReducer.toDos});
 
 const mapDispatchToProps = dispatch => {
     return {
-        addTodo: todo => {
-            dispatch(addTodo(todo))
-        },
         deleteTodo: index => {
             dispatch(deleteTodo(index))
         }

@@ -3,11 +3,12 @@ import { createAppContainer, createBottomTabNavigator, createStackNavigator } fr
 import Home from '../pages/Home/Home';
 import ToDos from '../pages/ToDos/ToDos';
 import Modal from '../pages/Modal/Modal';
+import Storage from '../pages/Storage/Storage';
 
 const StackNavigator = createStackNavigator(
     {
-        todos: {screen: ToDos},
-        details: {screen: Modal,}
+        todos: ToDos,
+        details: Modal,
     },
     {
         initialRouteName: 'todos',
@@ -18,6 +19,7 @@ const AppNavigator = createBottomTabNavigator(
     {
         home: Home,
         todos: StackNavigator,
+        storage: Storage,
     },
     {
         initialRouteName: 'home',
