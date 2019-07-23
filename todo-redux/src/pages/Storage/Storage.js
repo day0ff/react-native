@@ -1,27 +1,15 @@
 import React, { Component } from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
+import { connect } from 'react-redux';
 
 import { View, Text, Button, StyleSheet } from 'react-native';
-import { TODO_STORE } from '../ToDos/ToDos';
 
 class Storage extends Component {
-    state = {
-        storage: null
-    };
-
-    getStorage = () => {
-        AsyncStorage.getItem(TODO_STORE).then(storage => this.setState({storage}));
-    };
 
     render() {
         return (
             <View style={styles.container}>
                 <Text style={styles.header}>Storage Page</Text>
-                <Button
-                    title="Get Storage."
-                    onPress={this.getStorage}
-                />
-                <Text style={styles.text}>{this.state.storage}</Text>
+                <Text style={styles.text}>{JSON.stringify(this.props.storage)}</Text>
             </View>
         )
     }
@@ -41,9 +29,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         margin: 15
     },
-    text:{
-        marginTop:15,
+    text: {
+        marginTop: 15,
     }
 });
+const mapStateToProps = state => ({storage: state.todoReducer});
 
-export default Storage;
+export default connect(mapStateToProps)(Storage);

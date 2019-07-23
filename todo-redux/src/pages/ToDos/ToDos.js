@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { addTodo } from '../../store/actions/todo';
-import { loadStorage, updateStorage } from '../../store/actions/storage';
 
 import {
     StyleSheet,
@@ -15,24 +14,12 @@ import {
     View
 } from 'react-native';
 
-export const TODO_STORE = 'todo_store';
-
 class ToDos extends Component {
     static navigationOptions = {
         title: 'TODO Page',
     };
 
     state = {text: null};
-
-    componentDidMount() {
-        this.props.loadStorage(TODO_STORE);
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.toDos.length !== this.props.toDos.length) {
-            this.props.updateStorage(TODO_STORE, {toDos: this.props.toDos});
-        }
-    }
 
     addTodo = () => {
         this.props.addTodo(this.state.text);
@@ -105,12 +92,6 @@ const mapStateToProps = state => ({toDos: state.todoReducer.toDos});
 
 const mapDispatchToProps = dispatch => {
     return {
-        loadStorage: key => {
-            dispatch(loadStorage(key));
-        },
-        updateStorage: (key, value) => {
-            dispatch(updateStorage(key, value));
-        },
         addTodo: todo => {
             dispatch(addTodo(todo))
         },
