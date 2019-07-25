@@ -3,14 +3,19 @@ import React from 'react';
 import App from './src/App';
 import { name as appName } from './app.json';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react'
 
-import configureStore from './src/store/store';
+import { View, ActivityIndicator } from 'react-native';
 
-const store = configureStore();
+import { store, persistor } from './src/store/store';
+
+const loading = () => (<View><ActivityIndicator size="large"/></View>);
 
 const RNRedux = () => (
     <Provider store={store}>
-        <App/>
+        <PersistGate persistor={persistor} loading={loading}>
+            <App/>
+        </PersistGate>
     </Provider>
 );
 

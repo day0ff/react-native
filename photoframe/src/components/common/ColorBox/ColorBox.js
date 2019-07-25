@@ -6,7 +6,14 @@ class ColorBox extends Component {
 
     render() {
         return (
-            <TouchableOpacity style={[styles.colorBox, {width: this.props.size, height: this.props.size}]}
+            <TouchableOpacity style={[
+                styles.colorBox,
+                {
+                    width: this.props.size,
+                    height: this.props.size,
+                    backgroundColor: this.props.color
+                }
+            ]}
                               onPress={this.props.onPress}
                               onLongPress={this.props.onLongPress}>
                 <View>
@@ -21,7 +28,6 @@ class ColorBox extends Component {
 const styles = StyleSheet.create({
     colorBox: {
         borderWidth: 1,
-        backgroundColor: '#F00',
     },
 });
 

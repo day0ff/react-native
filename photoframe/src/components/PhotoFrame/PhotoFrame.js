@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { View, Text, StyleSheet } from 'react-native';
 
@@ -12,6 +13,7 @@ class PhotoFrame extends Component {
         return (
             <View style={[this.props.style, styles.photoFrame]}>
                 <Text>PhotoFrame</Text>
+                <Text>STATE: {JSON.stringify(this.props)}</Text>
             </View>
         );
     }
@@ -24,10 +26,12 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-evenly',
-        width:'100%',
-        height:'100%',
-        borderWidth:1,
+        width: '100%',
+        height: '100%',
+        borderWidth: 1,
     },
 });
 
-export default PhotoFrame;
+const mapStateToProps = state => ({colorPalette: state.colorPaletteReducer.colorPalette});
+
+export default connect(mapStateToProps)(PhotoFrame);
