@@ -9,7 +9,7 @@ import { View, ActivityIndicator } from 'react-native';
 
 import { store, persistor } from './src/store/store';
 
-const loading = () => (<View><ActivityIndicator size="large"/></View>);
+const loading = (<View><ActivityIndicator size="large"/></View>);
 
 const RNRedux = () => (
     <Provider store={store}>
