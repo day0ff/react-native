@@ -15,6 +15,11 @@ class ColorPalette extends Component {
         count: 4
     };
 
+    changeColor = index => {
+        alert('Long Pressed.');
+        this.props.changeColor(index, '#F00');
+    };
+
     onLayout = ({nativeEvent: {layout: {x, y, width, height}}}) => {
         const size = Math.trunc(height / 2);
         const count = Math.trunc(width / size) * 2;
@@ -27,15 +32,10 @@ class ColorPalette extends Component {
             .map((color, index) => (
                 <ColorBox size={this.state.size}
                           key={index}
-                          color={color}
+                          color={color.color}
                           onPress={() => alert('Pressed.')}
                           onLongPress={() => this.changeColor(index)}/>
             ));
-    };
-
-    changeColor = index =>{
-        alert('Long Pressed.');
-        this.props.changeColor(index,'#F00');
     };
 
     render() {

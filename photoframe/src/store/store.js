@@ -21,7 +21,7 @@ const colorPalettePersistConfig = {
     // blacklist: ['size', 'count'], blacklist reducer persist
 };
 
-const rootReducer = combineReducers({colorPaletteReducer:persistReducer(colorPalettePersistConfig,colorPaletteReducer)});
+export const rootReducer = combineReducers({colorPaletteReducer: persistReducer(colorPalettePersistConfig, colorPaletteReducer)});
 
 export const store = createStore(persistReducer(rootPersistConfig, rootReducer), compose(applyMiddleware(thunk)));
 
