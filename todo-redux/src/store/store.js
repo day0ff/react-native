@@ -5,19 +5,25 @@ import { persistStore, persistReducer } from 'redux-persist';
 
 import todoReducer from './reducers/todo-reducer';
 
+const ROOT_KEY = 'root';
 const TODO_REDUX_KEY = 'todo_redux';
 
-const persistConfig = {
-    key: TODO_REDUX_KEY,
+const rootPersistConfig = {
+    key: ROOT_KEY,
     storage: AsyncStorage,
     whitelist: ['todoReducer'],
+};
+
+const todoPersistConfig = {
+    key: TODO_REDUX_KEY,
+    storage: AsyncStorage,
+    whitelist: ['toDos'],
     // blacklist: ['todoReducer'], blacklist reducer for persist
 };
 
-const rootReducer = combineReducers({todoReducer});
+const rootReducer = combineReducers({todoReducer: persistReducer(todoPersistConfig, todoReducer)});
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = createStore(persistedReducer, compose(applyMiddleware(thunk)));
+export const store = createStore(persistReducer(rootPersistConfig, rootReducer), compose(applyMiddleware(thunk)));
 
 export const persistor = persistStore(store);
