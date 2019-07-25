@@ -8,7 +8,7 @@ const Navigator = createBottomTabNavigator(
         storage: Storage,
     },
     {
-        initialRouteName: 'storage',
+        initialRouteName: 'painter',
         tabBarOptions: {
             activeTintColor: '#e91e63',
             tabStyle: {

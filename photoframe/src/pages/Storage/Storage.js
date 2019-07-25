@@ -15,7 +15,7 @@ class Storage extends Component {
                 <Text>Storage</Text>
                 <Button title="Clear Storage" onPress={this.clearStorage}/>
                 <ScrollView style={{width: '80%'}}>
-                    <Text>{JSON.stringify(this.props, null, 2)}</Text>
+                    <Text>{JSON.stringify(this.props, null, 4)}</Text>
                 </ScrollView>
             </View>
         );

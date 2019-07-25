@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import colorPaletteReducer from '../../../store/reducers/color-palette-reducer';
-
 import { View, StyleSheet } from 'react-native';
 import ColorBox from '../ColorBox/ColorBox';
 import { COLOR_PALETTE_ACTION } from '../../../store/actions/color-palette-action';
@@ -16,13 +14,14 @@ class ColorPalette extends Component {
     };
 
     changeColor = index => {
-        alert('Long Pressed.');
+        // alert('changeColor');
         this.props.changeColor(index, '#F00');
+        this.props.setCurrentColor('#F00');
     };
 
     onLayout = ({nativeEvent: {layout: {x, y, width, height}}}) => {
-        const size = Math.trunc(height / 2);
-        const count = Math.trunc(width / size) * 2;
+        const size = Math.trunc(height / 3);
+        const count = Math.trunc(width / size) * 3;
         this.setState({size, count})
     };
 
@@ -32,8 +31,8 @@ class ColorPalette extends Component {
             .map((color, index) => (
                 <ColorBox size={this.state.size}
                           key={index}
-                          color={color.color}
-                          onPress={() => alert('Pressed.')}
+                          color={color}
+                          onPress={() => this.props.setCurrentColor(color)}
                           onLongPress={() => this.changeColor(index)}/>
             ));
     };

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import Menu from '../../components/Menu/Menu';
 import Palette from '../../components/Palette/Palette';
 import PhotoFrame from '../../components/PhotoFrame/PhotoFrame';
 import Controls from '../../components/Controls/Controls';
@@ -11,9 +10,6 @@ export default class Painter extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={[styles.section]}>
-                    <Menu/>
-                </View>
                 <View style={[styles.section, styles.palette]}>
                     <Palette/>
                 </View>
@@ -41,7 +37,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
     palette: {
-        height: '20%',
+        height: '30%',
     },
     photoFrame: {
         height: '60%',

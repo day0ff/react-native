@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
 import ColorPalette from '../common/ColorPalette/ColorPalette';
+import { CURRENT_COLOR_ACTION } from '../../store/actions/current-color-action';
+
+const {setCurrentColor} = CURRENT_COLOR_ACTION;
 
 class Palette extends Component {
 
-    constructor() {
-        super();
-    }
+    setCurrentColor = currentColor => {
+        this.props.setCurrentColor(currentColor);
+    };
 
     render() {
         return (
             <View style={[this.props.style, styles.palette]}>
                 <View style={styles.colorPalette}>
-                    <ColorPalette/>
+                    <ColorPalette setCurrentColor={this.setCurrentColor}/>
                 </View>
-                <View style={styles.currentColorBox}/>
+                <View style={[styles.currentColorBox, {backgroundColor: this.props.currentColor}]}/>
             </View>
         );
     }
@@ -40,8 +43,17 @@ const styles = StyleSheet.create({
         width: '20%',
         height: '80%',
         borderWidth: 1,
-        backgroundColor: '#FF0',
     },
 });
 
-export default Palette;
+const mapStateToProps = state => ({currentColor: state.currentColorReducer.currentColor});
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setCurrentColor: (currentColor) => {
+            dispatch(setCurrentColor(currentColor))
+        },
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Palette);

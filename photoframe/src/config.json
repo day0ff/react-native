@@ -1,4 +1,22 @@
 {
-  "root":"root",
-  "color_palette_key":"color_palette_key"
+  "root_key": "root_key",
+  "color_palette_key": "color_palette_key",
+  "current_color":"#FFF",
+  "color_palette_15": [
+    "#F00",
+    "#FF0",
+    "#0F0",
+    "#0FF",
+    "#FFF",
+    "#936",
+    "#F90",
+    "#693",
+    "#09F",
+    "#999",
+    "#639",
+    "#F60",
+    "#060",
+    "#00F",
+    "#666"
+  ]
 }

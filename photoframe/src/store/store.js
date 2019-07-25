@@ -6,9 +6,10 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 
 import * as config from '../config';
 import colorPaletteReducer from './reducers/color-palette-reducer';
+import currentColorReducer from "./reducers/current-color-reducer";
 
 const rootPersistConfig = {
-    key: config.root,
+    key: config.root_key,
     storage: AsyncStorage,
     whitelist: ['colorPaletteReducer'],
 };
@@ -21,7 +22,10 @@ const colorPalettePersistConfig = {
     // blacklist: ['size', 'count'], blacklist reducer persist
 };
 
-export const rootReducer = combineReducers({colorPaletteReducer: persistReducer(colorPalettePersistConfig, colorPaletteReducer)});
+export const rootReducer = combineReducers({
+    colorPaletteReducer: persistReducer(colorPalettePersistConfig, colorPaletteReducer),
+    currentColorReducer
+});
 
 export const store = createStore(persistReducer(rootPersistConfig, rootReducer), compose(applyMiddleware(thunk)));
 
