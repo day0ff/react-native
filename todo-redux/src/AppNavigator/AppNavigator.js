@@ -3,6 +3,7 @@ import { createAppContainer, createBottomTabNavigator, createStackNavigator } fr
 import Home from '../pages/Home/Home';
 import ToDos from '../pages/ToDos/ToDos';
 import Modal from '../pages/Modal/Modal';
+import Gesture from '../pages/Gesture/Gesture';
 import Storage from '../pages/Storage/Storage';
 
 const StackNavigator = createStackNavigator(
@@ -19,10 +20,11 @@ const AppNavigator = createBottomTabNavigator(
     {
         home: Home,
         todos: StackNavigator,
+        gesture: Gesture,
         storage: Storage,
     },
     {
-        initialRouteName: 'home',
+        initialRouteName: 'gesture',
         tabBarOptions: {
             activeTintColor: '#e91e63',
             tabStyle: {
