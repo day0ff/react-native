@@ -4,9 +4,16 @@ import { View, StyleSheet } from 'react-native';
 import Palette from '../../components/Palette/Palette';
 import PhotoFrame from '../../components/PhotoFrame/PhotoFrame';
 import Controls from '../../components/Controls/Controls';
+import LogoTitle from '../../components/common/LogoTitle/LogoTitle';
 
 
 export default class Painter extends Component {
+    static navigationOptions = ({navigation}) => {
+        return {
+            headerTitle: <LogoTitle navigation={navigation} title="Painter"/>
+        }
+    };
+
     render() {
         return (
             <View style={styles.container}>

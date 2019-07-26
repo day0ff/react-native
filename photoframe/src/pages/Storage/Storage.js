@@ -4,7 +4,15 @@ import { persistStore } from 'redux-persist';
 
 import { View, ScrollView, Text, Button, StyleSheet } from 'react-native';
 
+import LogoTitle from '../../components/common/LogoTitle/LogoTitle';
+
 class Storage extends Component {
+    static navigationOptions = ({navigation}) => {
+        return {
+            headerTitle: <LogoTitle navigation={navigation} title="Storage"/>
+        }
+    };
+
     clearStorage = () => {
         persistStore(this.props).purge().then(() => alert('Purge Storage.'));
     };

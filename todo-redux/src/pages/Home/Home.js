@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 21,
         fontWeight: 'bold',
-        margin:15
+        common:15
     }
 });
 

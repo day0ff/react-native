@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     header: {
-        margin: '2%',
+        common: '2%',
     },
     display:{
         height:'50%'
