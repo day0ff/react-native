@@ -14,9 +14,9 @@ class ColorPalette extends Component {
     };
 
     changeColor = index => {
-        // alert('changeColor');
-        this.props.changeColor(index, '#F00');
-        this.props.setCurrentColor('#F00');
+        alert('changeColor ' + index);
+        // this.props.changeColor(index, '#F00');
+        // this.props.setCurrentColor('#F00');
     };
 
     onLayout = ({nativeEvent: {layout: {x, y, width, height}}}) => {

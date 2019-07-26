@@ -41,5 +41,6 @@ const styles = StyleSheet.create({
     },
     photoFrame: {
         height: '60%',
+        width: '100%',
     }
 });
