@@ -37,10 +37,10 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
     palette: {
-        height: '30%',
+        height: '20%',
     },
     photoFrame: {
-        height: '60%',
+        height: '70%',
         width: '100%',
     }
 });

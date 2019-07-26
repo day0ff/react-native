@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import ColorPalette from '../common/ColorPalette/ColorPalette';
 import { CURRENT_COLOR_ACTION } from '../../store/actions/current-color-action';
 
@@ -15,6 +15,11 @@ class Palette extends Component {
     render() {
         return (
             <View style={[this.props.style, styles.palette]}>
+                <View style={styles.instruments}>
+                    <Text>Mode</Text>
+                    <Text>Mode</Text>
+                    <Text>Mode</Text>
+                </View>
                 <View style={styles.colorPalette}>
                     <ColorPalette setCurrentColor={this.setCurrentColor}/>
                 </View>
@@ -34,8 +39,13 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
     },
+    instruments:{
+        width: '20%',
+        height: '80%',
+        borderWidth: 1,
+    },
     colorPalette: {
-        width: '70%',
+        width: '50%',
         height: '80%',
         borderWidth: 1,
     },

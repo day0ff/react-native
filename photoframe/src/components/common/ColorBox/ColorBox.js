@@ -16,8 +16,8 @@ class ColorBox extends Component {
             ]}
                               onPress={this.props.onPress}
                               onLongPress={this.props.onLongPress}>
-                <View>
-                    <Text>{this.props.children}</Text>
+                <View style={styles.box}>
+                    <Text style={styles.text}>{this.props.children}</Text>
                 </View>
             </TouchableOpacity>
         );
@@ -29,6 +29,16 @@ const styles = StyleSheet.create({
     colorBox: {
         borderWidth: 1,
     },
+    box: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width:'100%',
+        height:'100%',
+    },
+    text: {
+        fontSize: 11,
+    }
 });
 
 export default ColorBox;
