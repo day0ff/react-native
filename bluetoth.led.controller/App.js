@@ -31,7 +31,7 @@ const INIT = {
     devices: [],
 };
 
-export default class App extends Component<Props> {
+export default class App extends Component {
     constructor() {
         super();
         this.state = {...INIT};
