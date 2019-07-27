@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
     },
     section: {
         height: '10%',
-        borderWidth: 1,
     },
     palette: {
         height: '20%',

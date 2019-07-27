@@ -76,11 +76,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         height: '100%',
+        backgroundColor:'gray',
     },
     frame: {
         display: 'flex',
         flexDirection: 'column',
         flexWrap: 'wrap',
+        borderColor:'white',
+        borderWidth:1,
     }
 });
 

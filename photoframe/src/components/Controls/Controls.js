@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
-import { View, Text, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';
+
+import eraser from '../../images/icons/eraser_all_active.png';
+import upload from '../../images/icons/upload_active.png';
+import save from '../../images/icons/save_active.png';
 
 class Controls extends Component {
 
@@ -11,8 +15,15 @@ class Controls extends Component {
     render() {
         return (
             <View style={[this.props.style, styles.controls]}>
-                <Text>Controls</Text>
-                <Text>Controls</Text>
+                <TouchableOpacity>
+                    <Image source={eraser} style={[styles.common]}/>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Image source={upload} style={[styles.common]}/>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Image source={save} style={[styles.common]}/>
+                </TouchableOpacity>
             </View>
         );
     }
@@ -25,8 +36,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-evenly',
-        width:'100%',
-        height:'100%',
+        width: '100%',
+        height: '100%',
+        backgroundColor:'black',
+    },
+    common: {
+        width: 60,
+        height: 60,
     },
 });
 
