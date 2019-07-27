@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import { View, TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
 
 import logo from '../../../images/logo.png';
-import bluetooth from '../../../images/icons/bluetooth_active.png';
-import connect from '../../../images/icons/connect_active.png';
+import bluetoothActive from '../../../images/icons/bluetooth_active.png';
+import bluetooth from '../../../images/icons/bluetooth.png';
+import connectIconActive from '../../../images/icons/connect_active.png';
+import connectIcon from '../../../images/icons/connect.png';
+
 
 class LogoTitle extends Component {
     render() {
@@ -16,12 +21,10 @@ class LogoTitle extends Component {
                 <Text style={[styles.common, styles.header]}>{this.props.title}</Text>
 
                 <View style={styles.controls}>
-                    <TouchableOpacity>
-                        <Image source={bluetooth} style={[styles.common, styles.bluetooth]}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Image source={connect} style={[styles.common, styles.connect]}/>
-                    </TouchableOpacity>
+                    <Image source={this.props.isBluethoosEnabled ? bluetoothActive : bluetooth}
+                           style={[styles.common, styles.bluetooth]}/>
+                    <Image source={this.props.isDeviceEnabled ? connectIconActive : connectIcon}
+                           style={[styles.common, styles.connectIcon]}/>
                 </View>
 
             </View>
@@ -59,7 +62,7 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30,
     },
-    connect: {
+    connectIcon: {
         width: 30,
         height: 30,
     },
@@ -70,5 +73,9 @@ const styles = StyleSheet.create({
         marginRight: 15,
     },
 });
+const mapStateToProps = state => ({
+    isBluethoosEnabled: state.deviceReducer.isBluethoosEnabled,
+    isDeviceEnabled: state.deviceReducer.isDeviceEnabled
+});
 
-export default LogoTitle;
+export default connect(mapStateToProps)(LogoTitle);

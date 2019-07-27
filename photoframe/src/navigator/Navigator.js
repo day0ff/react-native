@@ -1,6 +1,7 @@
 import { createAppContainer, createDrawerNavigator, createStackNavigator } from 'react-navigation';
 import Painter from '../pages/Painter/Painter';
 import Storage from '../pages/Storage/Storage';
+import Connection from '../pages/Connection/Connection';
 
 const PainterNavigator = createStackNavigator(
     {
@@ -20,13 +21,23 @@ const StorageNavigator = createStackNavigator(
     }
 );
 
+const ConnectionNavigator = createStackNavigator(
+    {
+        connection: Connection
+    },
+    {
+        initialRouteName: 'connection',
+    }
+);
+
 const Navigator = createDrawerNavigator(
     {
         painter: PainterNavigator,
         storage: StorageNavigator,
+        connection: ConnectionNavigator,
     },
     {
-        initialRouteName: 'painter',
+        initialRouteName: 'connection',
         drawerWidth: 200,
         contentOptions: {
             activeTintColor: 'black',

@@ -8,11 +8,12 @@ import * as config from '../config';
 import colorPaletteReducer from './reducers/color-palette-reducer';
 import currentColorReducer from './reducers/current-color-reducer';
 import pictureReducer from './reducers/picture-reducer';
+import deviceReducer from './reducers/device-reducer';
 
 const rootPersistConfig = {
     key: config.root_key,
     storage: AsyncStorage,
-    blacklist: ['currentColorReducer'],
+    whitelist: ['colorPaletteReducer', 'pictureReducer'],
 };
 
 const colorPalettePersistConfig = {
@@ -33,7 +34,8 @@ const picturePersistConfig = {
 export const rootReducer = combineReducers({
     colorPaletteReducer: persistReducer(colorPalettePersistConfig, colorPaletteReducer),
     pictureReducer: persistReducer(picturePersistConfig, pictureReducer),
-    currentColorReducer
+    currentColorReducer,
+    deviceReducer
 });
 
 export const store = createStore(persistReducer(rootPersistConfig, rootReducer), compose(applyMiddleware(thunk)));
