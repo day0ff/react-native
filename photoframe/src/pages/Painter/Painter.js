@@ -6,7 +6,6 @@ import PhotoFrame from '../../components/PhotoFrame/PhotoFrame';
 import Controls from '../../components/Controls/Controls';
 import LogoTitle from '../../components/common/LogoTitle/LogoTitle';
 
-
 export default class Painter extends Component {
     static navigationOptions = ({navigation}) => {
         return {

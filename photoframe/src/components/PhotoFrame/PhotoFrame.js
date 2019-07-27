@@ -6,43 +6,34 @@ import { View, StyleSheet } from 'react-native';
 
 import ColorBox from '../common/ColorBox/ColorBox';
 
-const initArray = (columns, rows) => {
-    return new Array(columns).fill(new Array(rows).fill('#FFF'));
-};
+import { PICTURE_ACTION } from '../../store/actions/picture-action';
+
+const {changePicturePixelColor} = PICTURE_ACTION;
 
 class PhotoFrame extends Component {
 
     state = {
-        size: 10,
-        columns: 9,
-        rows: 12,
-        picture: initArray(9, 12),
-        frameWidth: 90,
-        frameHeight: 120,
+        size: 25,
+        frameWidth: 225,
+        frameHeight: 300,
     };
 
     setColor = (x, y) => {
-        this.state.picture[x] && this.state.picture[x][y] && this.state.picture[x][y] !== this.props.currentColor &&
-        this.setState(({picture}) =>
-            ({
-                picture: picture.map((pictureCol, column) =>
-                    pictureCol.map((color, row) =>
-                        column === x && row === y ? this.props.currentColor : color))
-            })
-        );
+        this.props.picture[x] && this.props.picture[x][y] && this.props.picture[x][y] !== this.props.currentColor &&
+        this.props.changePicturePixelColor(x, y, this.props.currentColor);
     };
 
     onLayout = ({nativeEvent: {layout: {x, y, width, height}}}) => {
-        const boxWidth = Math.trunc(width / this.state.columns);
-        const boxHeight = Math.trunc(height / this.state.rows);
+        const boxWidth = Math.trunc(width / this.props.columns);
+        const boxHeight = Math.trunc(height / this.props.rows);
         const size = boxWidth > boxHeight ? boxHeight : boxWidth;
-        const frameWidth = size * this.state.columns + 2;
-        const frameHeight = size * this.state.rows + 2;
+        const frameWidth = size * this.props.columns + 2;
+        const frameHeight = size * this.props.rows + 2;
         this.setState({size, frameWidth, frameHeight});
     };
 
     renderColorBoxes = () => {
-        return this.state.picture
+        return this.props.picture
             .map((pictureCol, x) =>
                 pictureCol.map((color, y) => (
                     <ColorBox size={this.state.size}
@@ -85,8 +76,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         height: '100%',
-        borderWidth: 3,
-        borderColor: 'red',
     },
     frame: {
         display: 'flex',
@@ -95,6 +84,19 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapStateToProps = state => ({currentColor: state.currentColorReducer.currentColor});
+const mapStateToProps = state => ({
+    currentColor: state.currentColorReducer.currentColor,
+    columns: state.pictureReducer.columns,
+    rows: state.pictureReducer.rows,
+    picture: state.pictureReducer.picture,
+});
 
-export default connect(mapStateToProps)(PhotoFrame);
+const mapDispatchToProps = dispatch => {
+    return {
+        changePicturePixelColor: (x, y, color) => {
+            dispatch(changePicturePixelColor(x, y, color))
+        },
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PhotoFrame);

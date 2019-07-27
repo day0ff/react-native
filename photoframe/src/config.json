@@ -1,22 +1,27 @@
 {
   "root_key": "root_key",
   "color_palette_key": "color_palette_key",
-  "current_color":"#FFF",
+  "picture_key":"picture_key",
+  "current_color":"#000",
   "color_palette_15": [
     "#F00",
     "#FF0",
     "#0F0",
     "#0FF",
-    "#FFF",
+    "#999",
     "#936",
     "#F90",
     "#693",
     "#09F",
-    "#999",
+    "#666",
     "#639",
     "#F60",
     "#060",
     "#00F",
-    "#666"
-  ]
+    "#000"
+  ],
+  "picture":{
+    "columns":9,
+    "rows":12
+  }
 }

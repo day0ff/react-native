@@ -27,16 +27,18 @@ class ColorBox extends Component {
 
 const styles = StyleSheet.create({
     colorBox: {
-        borderWidth: 1,
+        borderColor: 'white',
+        borderWidth: 2,
     },
     box: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        width:'100%',
-        height:'100%',
+        width: '100%',
+        height: '100%',
     },
     text: {
+        color: 'white',
         fontSize: 11,
     }
 });

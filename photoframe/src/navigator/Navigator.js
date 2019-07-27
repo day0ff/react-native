@@ -27,26 +27,14 @@ const Navigator = createDrawerNavigator(
     },
     {
         initialRouteName: 'painter',
-        // tabBarOptions: {
-        //     activeTintColor: '#e91e63',
-        //     tabStyle: {
-        //         paddingLeft: 5,
-        //         paddingRight: 5,
-        //     },
-        //     labelStyle: {
-        //         fontSize: 18,
-        //         height: '100%',
-        //         padding: 10,
-        //         borderWidth: 1,
-        //         borderRadius: 8,
-        //         borderColor: 'gray',
-        //     },
-        //     style: {
-        //         display: 'flex',
-        //         backgroundColor: 'white',
-        //         alignItems: 'center',
-        //     },
-        // }
+        drawerWidth: 200,
+        contentOptions: {
+            activeTintColor: 'black',
+            inactiveTintColor: 'gray',
+            labelStyle: {
+                textTransform: 'capitalize',
+            },
+        }
     },
 );
 
