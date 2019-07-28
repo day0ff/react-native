@@ -22,17 +22,17 @@ class Controls extends Component {
     };
 
     sendPicture = () => {
-        const {picture} = this.props;
+        const picture = JSON.parse(JSON.stringify(this.props.picture));
         const array = picture
             .map((column, index) => index % 2 === 0 ? column : column.reverse())
             .flatMap(color => color)
             .map(color => {
                 const hsv = toHsv(color);
-                return [hsv.h, hsv.s, hsv.v].join(',');
+                return [hsv.h, Math.trunc(hsv.s * 255), Math.trunc(hsv.v * 255)].join(',');
             })
             .flatMap(color => color)
             .join(':');
-        BluetoothSerial.write(`PICTURE#${array}\r\n`);
+        BluetoothSerial.write(`${array}:\r\n`);
     };
 
     render() {
