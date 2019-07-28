@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { View, Text, Image, ToastAndroid, Switch, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+    View,
+    Text,
+    TextInput,
+    Button,
+    Image,
+    ToastAndroid,
+    Switch,
+    FlatList,
+    TouchableOpacity,
+    StyleSheet
+} from 'react-native';
 
 import BluetoothSerial from 'react-native-bluetooth-serial'
 import LogoTitle from '../../components/common/LogoTitle/LogoTitle';
@@ -20,6 +31,8 @@ class Connection extends Component {
 
     state = {
         devices: [],
+        text: '',
+        textASCII: '',
     };
 
     componentWillMount() {
@@ -110,6 +123,13 @@ class Connection extends Component {
             })
     }
 
+    sendStr = (str) => {
+        BluetoothSerial.write(`${str}\r\n`)
+            .then(() => ToastAndroid.show(`Send : [${str}\n\r`, ToastAndroid.LONG))
+            .catch((err) => ToastAndroid.show(err.message, ToastAndroid.LONG));
+        this.setState({text: ''});
+    };
+
     render() {
         return (
             <View style={styles.container}>
@@ -139,6 +159,10 @@ class Connection extends Component {
                         </TouchableOpacity>
                     )}
                 />
+                <TextInput style={styles.textInput}
+                           onChangeText={(text) => this.setState({text})}
+                           value={this.state.text}/>
+                <Button title="TEXT" onPress={() => this.sendStr(this.state.text)}/>
             </View>
         );
     }
@@ -192,6 +216,11 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30,
         marginRight: 10,
+    },
+    textInput: {
+        width:100,
+        backgroundColor: 'white',
+        color: 'black',
     }
 });
 const mapStateToProps = state => ({isBluethoosEnabled: state.deviceReducer.isBluethoosEnabled});

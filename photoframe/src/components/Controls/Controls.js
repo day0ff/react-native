@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import BluetoothSerial from 'react-native-bluetooth-serial'
+import { toHsv } from 'react-native-color-picker'
 import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';
+
 
 import eraser from '../../images/icons/eraser_all_active.png';
 import upload from '../../images/icons/upload_active.png';
-import save from '../../images/icons/save_active.png';
+import save from '../../images/icons/save.png';
+
 import { PICTURE_ACTION } from '../../store/actions/picture-action';
 
 const {clearPicture} = PICTURE_ACTION;
@@ -17,13 +21,27 @@ class Controls extends Component {
         this.props.clearPicture(columns, rows);
     };
 
+    sendPicture = () => {
+        const {picture} = this.props;
+        const array = picture
+            .map((column, index) => index % 2 === 0 ? column : column.reverse())
+            .flatMap(color => color)
+            .map(color => {
+                const hsv = toHsv(color);
+                return [hsv.h, hsv.s, hsv.v].join(',');
+            })
+            .flatMap(color => color)
+            .join(':');
+        BluetoothSerial.write(`PICTURE#${array}\r\n`);
+    };
+
     render() {
         return (
             <View style={[this.props.style, styles.controls]}>
                 <TouchableOpacity onPress={this.clearPicture}>
                     <Image source={eraser} style={[styles.common]}/>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={this.sendPicture}>
                     <Image source={upload} style={[styles.common]}/>
                 </TouchableOpacity>
                 <TouchableOpacity>
@@ -53,6 +71,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => ({
     columns: state.pictureReducer.columns,
     rows: state.pictureReducer.rows,
+    picture: state.pictureReducer.picture,
 });
 
 const mapDispatchToProps = dispatch => {
