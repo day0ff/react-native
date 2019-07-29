@@ -28,7 +28,7 @@ class Controls extends Component {
             .flatMap(color => color)
             .map(color => {
                 const hsv = toHsv(color);
-                return [hsv.h, Math.trunc(hsv.s * 255), Math.trunc(hsv.v * 255)].join(',');
+                return [Math.round(hsv.h * 255 / 360), Math.trunc(hsv.s * 255), Math.trunc(hsv.v * 255)].join(',');
             })
             .flatMap(color => color)
             .join(':');
