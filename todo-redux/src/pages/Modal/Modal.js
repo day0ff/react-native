@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 21,
         fontWeight: 'bold',
-        common: 15
+        padding: 15
     }
 });
 const mapStateToProps = state => ({toDos: state.todoReducer.toDos});

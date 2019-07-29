@@ -70,12 +70,12 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 21,
         fontWeight: 'bold',
-        common: 15
+        padding: 15
     },
     newTodoContainer: {
         display: 'flex',
         flexDirection: 'row',
-        common: 15,
+        padding: 15,
     },
     textInput: {
         borderWidth: 1,

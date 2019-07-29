@@ -9,6 +9,10 @@ class Gesture extends Component {
         text_2: 'TEXT 2',
     };
 
+    onPress = ({nativeEvent}) => {
+        this.setState({[`text_1`]: JSON.stringify(nativeEvent, null, 4)})
+    };
+
     onGestureEvent = ({nativeEvent}) => {
         this.setState({[`text_${nativeEvent.handlerTag}`]: JSON.stringify(nativeEvent, null, 4)})
     };
@@ -17,7 +21,6 @@ class Gesture extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.header}>Gesture Page</Text>
-
                 <PanGestureHandler onGestureEvent={this.onGestureEvent}>
                     <View style={styles.gestureBox}>
                         <Text>{this.state.text_1}</Text>
@@ -45,7 +48,7 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 21,
         fontWeight: 'bold',
-        common: 15
+        padding: 15
     },
     gestureBox: {
         width: 400,
