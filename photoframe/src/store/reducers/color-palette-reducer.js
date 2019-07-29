@@ -1,8 +1,8 @@
 import * as config from '../../config';
 
-import { COLOR_PALETTE_ACTION_TYPES } from '../actions/action-types';
+import { ACTION_TYPES } from '../actions/action-types';
 
-const {LOAD_COLOR_PALETTE, CHANGE_COLOR} = COLOR_PALETTE_ACTION_TYPES;
+const {LOAD_COLOR_PALETTE, CHANGE_COLOR} = ACTION_TYPES.COLOR_PALETTE_ACTION_TYPES;
 
 const INITIAL_STATE = {
     colorPalette: config.color_palette_15

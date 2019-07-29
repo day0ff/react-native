@@ -1,8 +1,8 @@
 import * as config from '../../config';
 
-import { COLOR_PALETTE_ACTION_TYPES } from '../actions/action-types';
+import { ACTION_TYPES } from '../actions/action-types';
 
-const {CHANGE_PICTURE_COLUMNS, CHANGE_PICTURE_ROWS, CHANGE_PICTURE_PIXEL_COLOR, CLEARER_PICTURE} = COLOR_PALETTE_ACTION_TYPES;
+const {CHANGE_PICTURE_COLUMNS, CHANGE_PICTURE_ROWS, CHANGE_PICTURE_PIXEL_COLOR, CLEARER_PICTURE} = ACTION_TYPES.PICTURE_ACTION_TYPES;
 
 const initArray = (columns, rows) => {
     return new Array(columns).fill(new Array(rows).fill(config.current_color));
