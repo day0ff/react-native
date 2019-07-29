@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { PanGestureHandler } from 'react-native-gesture-handler';
@@ -10,7 +10,7 @@ import { PICTURE_ACTION } from '../../store/actions/picture-action';
 
 const {changePicturePixelColor} = PICTURE_ACTION;
 
-class PhotoFrame extends Component {
+class PhotoFrame extends PureComponent {
 
     state = {
         size: 25,
@@ -76,14 +76,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         height: '100%',
-        backgroundColor:'gray',
+        backgroundColor: 'gray',
     },
     frame: {
         display: 'flex',
         flexDirection: 'column',
         flexWrap: 'wrap',
-        borderColor:'white',
-        borderWidth:1,
+        borderColor: 'white',
+        borderWidth: 1,
     }
 });
 

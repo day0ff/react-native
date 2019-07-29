@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 
-class ColorBox extends Component {
+class ColorBox extends PureComponent {
 
     render() {
         return (
