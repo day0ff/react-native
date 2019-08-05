@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 
 import BluetoothSerial from 'react-native-bluetooth-serial'
 import { toHsv } from 'react-native-color-picker'
-import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { asyncForEach } from '../../misc/asyncForEach';
 
+import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
 import eraser from '../../images/icons/eraser_all_active.png';
 import upload from '../../images/icons/upload_active.png';
@@ -21,18 +22,20 @@ class Controls extends Component {
         this.props.clearPicture(columns, rows);
     };
 
-    sendPicture = () => {
+    sendPicture = async () => {
         const picture = JSON.parse(JSON.stringify(this.props.picture));
         const array = picture
             .map((column, index) => index % 2 === 0 ? column : column.reverse())
-            .flatMap(color => color)
-            .map(color => {
+            .map(column => column.map(color => {
                 const hsv = toHsv(color);
                 return [Math.round(hsv.h * 255 / 360), Math.trunc(hsv.s * 255), Math.trunc(hsv.v * 255)].join(',');
-            })
-            .flatMap(color => color)
-            .join(':');
-        BluetoothSerial.write(`${array}:\r\n`);
+            }).join(':'));
+        BluetoothSerial.withDelimiter('\r').then(async () => {
+            asyncForEach(array, async (array, index) => {
+                await BluetoothSerial.write(`LINE#${index}[${array}:]\r\n`);
+                await new Promise(resolve => BluetoothSerial.on('read', resolve));
+            }).then(() => BluetoothSerial.write(`SHOW#\r\n`));
+        });
     };
 
     render() {

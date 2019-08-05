@@ -51,7 +51,7 @@ class ColorPalette extends Component {
 const styles = StyleSheet.create({
     colorPalette: {
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         flexWrap: 'wrap',
         alignItems: 'center',
         justifyContent: 'center',

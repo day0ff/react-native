@@ -33,6 +33,7 @@ class Connection extends Component {
         devices: [],
         text: '',
         textASCII: '',
+        income: '',
     };
 
     componentWillMount() {
@@ -41,6 +42,11 @@ class Connection extends Component {
             this.props.toggleBluethoos(false);
             this.props.toggleDevice(false);
             this.setState({devices: []});
+        });
+        BluetoothSerial.withDelimiter('\r').then(() => {
+            BluetoothSerial.on('read', data => {
+                this.setState({income: data.data});
+            });
         });
     }
 
@@ -159,6 +165,7 @@ class Connection extends Component {
                         </TouchableOpacity>
                     )}
                 />
+                <Text style={styles.deviceName}>{this.state.income}</Text>
                 <TextInput style={styles.textInput}
                            onChangeText={(text) => this.setState({text})}
                            value={this.state.text}/>
@@ -218,7 +225,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     textInput: {
-        width:100,
+        width: 100,
         backgroundColor: 'white',
         color: 'black',
     }
