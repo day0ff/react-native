@@ -26,7 +26,7 @@ const pictureReducer = (state = INITIAL_STATE, action) => {
                 picture: state
                     .picture.map((pictureCol, column) =>
                         pictureCol.map((color, row) =>
-                            column === action.x && row === action.y ? action.color : color
+                            column === +action.x && row === +action.y ? action.color : color
                         )
                     )
             };

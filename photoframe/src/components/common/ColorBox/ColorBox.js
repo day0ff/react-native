@@ -3,6 +3,10 @@ import React, { PureComponent } from 'react';
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 
 class ColorBox extends PureComponent {
+    onPress = () => {
+        const [x, y] = this.props.id.split(':');
+        this.props.onPress(x, y);
+    };
 
     render() {
         return (
@@ -14,7 +18,7 @@ class ColorBox extends PureComponent {
                     backgroundColor: this.props.color
                 }
             ]}
-                              onPress={this.props.onPress}
+                              onPress={this.onPress}
                               onLongPress={this.props.onLongPress}>
                 <View style={styles.box}>
                     <Text style={styles.text}>{this.props.children}</Text>

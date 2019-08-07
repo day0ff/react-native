@@ -38,8 +38,9 @@ class PhotoFrame extends PureComponent {
                 pictureCol.map((color, y) => (
                     <ColorBox size={this.state.size}
                               key={`${x}:${y}`}
+                              id={`${x}:${y}`}
                               color={color}
-                              onPress={() => this.setColor(x, y)}
+                              onPress={this.setColor}
                     >{`(${x},${y})`}</ColorBox>
                 ))
             )

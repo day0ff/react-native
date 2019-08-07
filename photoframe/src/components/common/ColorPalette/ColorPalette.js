@@ -31,6 +31,7 @@ class ColorPalette extends Component {
             .map((color, index) => (
                 <ColorBox size={this.state.size}
                           key={index}
+                          id={`0:${index}`}
                           color={color}
                           onPress={() => this.props.setCurrentColor(color)}
                           onLongPress={() => this.changeColor(index)}/>
