@@ -2,22 +2,26 @@ import React, { Component } from 'react';
 
 import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
-import brush from '../../../images/icons/brush_active.png';
-import bucket from '../../../images/icons/bucket.png';
-import loupe from '../../../images/icons/loupe.png';
+import * as config from '../../../config';
+import brush from '../../../images/icons/brush.png';
+import brushActive from '../../../images/icons/brush_active.png';
+import drop from '../../../images/icons/drop.png';
+import eraser from '../../../images/icons/eraser.png';
+import eraserActive from '../../../images/icons/eraser_active.png';
 
 class Tools extends Component {
+
     render() {
         return (
             <View style={[this.props.style, styles.tools]}>
-                <TouchableOpacity>
-                    <Image source={brush} style={[styles.common]}/>
+                <TouchableOpacity onPress={() => this.props.setCurrentColor(config.color_palette_15[0])}>
+                    <Image source={this.props.isBrushActive ? brushActive : brush} style={[styles.common]}/>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                    <Image source={bucket} style={[styles.common]}/>
+                    <Image source={drop} style={[styles.common]}/>
                 </TouchableOpacity>
-                <TouchableOpacity>
-                    <Image source={loupe} style={[styles.common]}/>
+                <TouchableOpacity onPress={() => this.props.setEraserColor(config.current_color)}>
+                    <Image source={this.props.isEraserActive ? eraserActive : eraser} style={[styles.common]}/>
                 </TouchableOpacity>
             </View>
         )

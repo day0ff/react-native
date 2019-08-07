@@ -41,7 +41,7 @@ class PhotoFrame extends PureComponent {
                               id={`${x}:${y}`}
                               color={color}
                               onPress={this.setColor}
-                    >{`(${x},${y})`}</ColorBox>
+                    />
                 ))
             )
     };

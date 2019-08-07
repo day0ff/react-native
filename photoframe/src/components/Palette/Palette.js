@@ -11,15 +11,29 @@ import { CURRENT_COLOR_ACTION } from '../../store/actions/current-color-action';
 const {setCurrentColor} = CURRENT_COLOR_ACTION;
 
 class Palette extends Component {
+    state = {
+        isBrushActive: true,
+        isEraserActive: false
+    };
 
     setCurrentColor = currentColor => {
+        this.setState({isBrushActive: true, isEraserActive: false});
+        this.props.setCurrentColor(currentColor);
+    };
+
+    setEraserColor = currentColor => {
+        this.setState({isBrushActive: false, isEraserActive: true});
         this.props.setCurrentColor(currentColor);
     };
 
     render() {
         return (
             <View style={[this.props.style, styles.palette]}>
-                <Tools style={styles.tools}/>
+                <Tools style={styles.tools}
+                       setCurrentColor={this.setCurrentColor}
+                       setEraserColor={this.setEraserColor}
+                       {...this.state}
+                />
                 <View style={styles.colorPalette}>
                     <ColorPalette setCurrentColor={this.setCurrentColor}/>
                 </View>
@@ -38,9 +52,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         width: '100%',
         height: '100%',
-        backgroundColor:'gray',
+        backgroundColor: 'gray',
     },
-    tools:{
+    tools: {
         width: '20%',
         height: '80%',
     },
