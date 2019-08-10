@@ -24,5 +24,9 @@
   "picture": {
     "columns": 9,
     "rows": 12
+  },
+  "animation":{
+    "range":15,
+    "time":4000
   }
 }

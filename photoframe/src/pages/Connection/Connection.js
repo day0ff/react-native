@@ -11,7 +11,7 @@ import {
     Switch,
     FlatList,
     TouchableOpacity,
-    StyleSheet
+    StyleSheet,
 } from 'react-native';
 
 import BluetoothSerial from 'react-native-bluetooth-serial'
@@ -19,6 +19,8 @@ import LogoTitle from '../../components/common/LogoTitle/LogoTitle';
 import connectIcon from '../../images/icons/connect_active.png';
 
 import { DEVICE_ACTION } from '../../store/actions/device-action';
+
+import RotateBox from '../../components/HOC/RotateBox';
 
 const {toggleBluethoos, toggleDevice} = DEVICE_ACTION;
 
@@ -165,6 +167,7 @@ class Connection extends Component {
                         </TouchableOpacity>
                     )}
                 />
+                <RotateBox color={'#ffc0cb'}/>
                 <Text style={styles.deviceName}>{this.state.income}</Text>
                 <TextInput style={styles.textInput}
                            onChangeText={(text) => this.setState({text})}
@@ -228,8 +231,9 @@ const styles = StyleSheet.create({
         width: 100,
         backgroundColor: 'white',
         color: 'black',
-    }
+    },
 });
+
 const mapStateToProps = state => ({isBluethoosEnabled: state.deviceReducer.isBluethoosEnabled});
 const mapDispatchToProps = dispatch => {
     return {

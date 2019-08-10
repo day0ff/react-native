@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 
-import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
+import { StyleSheet, TouchableOpacity, Animated, Text } from 'react-native';
+import colorful from '../../HOC/colorful';
 
 class ColorBox extends PureComponent {
     onPress = () => {
@@ -12,13 +13,13 @@ class ColorBox extends PureComponent {
         return (
             <TouchableOpacity style={[
                 dynamicStyles(this.props).colorBox,
-                this.props.isColorful ? styles.colorful : styles.mono,
+                this.props.isColorful ? styles.colorful : styles.mono
             ]}
                               onPress={this.onPress}
                               onLongPress={this.props.onLongPress}>
-                <View style={[styles.box,]}>
+                <Animated.View style={[styles.box, this.props.colorful]}>
                     <Text style={styles.text}>{this.props.children}</Text>
-                </View>
+                </Animated.View>
             </TouchableOpacity>
         );
     }
@@ -57,4 +58,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ColorBox;
+export default  colorful(ColorBox);
