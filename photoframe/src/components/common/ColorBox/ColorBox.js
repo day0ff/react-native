@@ -11,16 +11,12 @@ class ColorBox extends PureComponent {
     render() {
         return (
             <TouchableOpacity style={[
-                styles.colorBox,
-                {
-                    width: this.props.size,
-                    height: this.props.size,
-                    backgroundColor: this.props.color
-                }
+                dynamicStyles(this.props).colorBox,
+                this.props.isColorful ? styles.colorful : styles.mono,
             ]}
                               onPress={this.onPress}
                               onLongPress={this.props.onLongPress}>
-                <View style={styles.box}>
+                <View style={[styles.box,]}>
                     <Text style={styles.text}>{this.props.children}</Text>
                 </View>
             </TouchableOpacity>
@@ -29,10 +25,24 @@ class ColorBox extends PureComponent {
 
 }
 
+const dynamicStyles = props => {
+    return StyleSheet.create({
+        colorBox: {
+            borderColor: 'white',
+            borderWidth: 2,
+            width: props.size,
+            height: props.size,
+            backgroundColor: props.color,
+        },
+    });
+};
+
 const styles = StyleSheet.create({
-    colorBox: {
+    colorful: {
+        borderColor: 'red',
+    },
+    mono: {
         borderColor: 'white',
-        borderWidth: 2,
     },
     box: {
         display: 'flex',

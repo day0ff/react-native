@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import BluetoothSerial from 'react-native-bluetooth-serial'
-import { toHsv } from 'react-native-color-picker'
+import BluetoothSerial from 'react-native-bluetooth-serial';
+import { toHsv } from 'react-native-color-picker';
 import { asyncForEach } from '../../misc/asyncForEach';
 
 import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';

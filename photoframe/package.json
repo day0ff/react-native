@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.1",
+    "color-convert": "^2.0.0",
     "react": "16.8.3",
     "react-native": "0.59.9",
     "react-native-bluetooth-serial": "^1.0.0-rc1",

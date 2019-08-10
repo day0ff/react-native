@@ -9,6 +9,7 @@ import colorPaletteReducer from './reducers/color-palette-reducer';
 import currentColorReducer from './reducers/current-color-reducer';
 import pictureReducer from './reducers/picture-reducer';
 import deviceReducer from './reducers/device-reducer';
+import brushReducer from './reducers/brush-reducer';
 
 const rootPersistConfig = {
     key: config.root_key,
@@ -35,7 +36,8 @@ export const rootReducer = combineReducers({
     colorPaletteReducer: persistReducer(colorPalettePersistConfig, colorPaletteReducer),
     pictureReducer: persistReducer(picturePersistConfig, pictureReducer),
     currentColorReducer,
-    deviceReducer
+    deviceReducer,
+    brushReducer,
 });
 
 export const store = createStore(persistReducer(rootPersistConfig, rootReducer), compose(applyMiddleware(thunk)));

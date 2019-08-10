@@ -1,27 +1,39 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
-import * as config from '../../../config';
 import brush from '../../../images/icons/brush.png';
 import brushActive from '../../../images/icons/brush_active.png';
-import drop from '../../../images/icons/drop.png';
+import colorful from '../../../images/icons/drop.png';
+import colorfulActive from '../../../images/icons/drop_active.png';
 import eraser from '../../../images/icons/eraser.png';
 import eraserActive from '../../../images/icons/eraser_active.png';
 
+import { BRUSH_ACTION } from '../../../store/actions/brush-action';
+import * as brushes from '../../../misc/brushes'
+
+const {setBrushType} = BRUSH_ACTION;
+
 class Tools extends Component {
+    setBrush = brushType => {
+        this.props.setBrushType(brushType);
+    };
 
     render() {
         return (
             <View style={[this.props.style, styles.tools]}>
-                <TouchableOpacity onPress={() => this.props.setCurrentColor(config.color_palette_15[0])}>
-                    <Image source={this.props.isBrushActive ? brushActive : brush} style={[styles.common]}/>
+                <TouchableOpacity onPress={() => this.setBrush(brushes.PAINTBRUSH)}>
+                    <Image source={this.props.brushType === brushes.PAINTBRUSH ? brushActive : brush}
+                           style={[styles.common]}/>
                 </TouchableOpacity>
-                <TouchableOpacity>
-                    <Image source={drop} style={[styles.common]}/>
+                <TouchableOpacity onPress={() => this.setBrush(brushes.COLORFUL)}>
+                    <Image source={this.props.brushType === brushes.COLORFUL ? colorfulActive : colorful}
+                           style={[styles.common]}/>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.setEraserColor(config.current_color)}>
-                    <Image source={this.props.isEraserActive ? eraserActive : eraser} style={[styles.common]}/>
+                <TouchableOpacity onPress={() => this.setBrush(brushes.ERASER)}>
+                    <Image source={this.props.brushType === brushes.ERASER ? eraserActive : eraser}
+                           style={[styles.common]}/>
                 </TouchableOpacity>
             </View>
         )
@@ -42,5 +54,15 @@ const styles = StyleSheet.create({
     },
 });
 
+const mapStateToProps = state => ({brushType: state.brushReducer.brushType});
 
-export default Tools;
+const mapDispatchToProps = dispatch => {
+    return {
+        setBrushType: brushType => {
+            dispatch(setBrushType(brushType))
+        },
+    }
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tools);

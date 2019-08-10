@@ -6,9 +6,11 @@ import { View, StyleSheet } from 'react-native';
 
 import ColorBox from '../common/ColorBox/ColorBox';
 
+import * as config from '../../config'
+import * as brushes from '../../misc/brushes'
 import { PICTURE_ACTION } from '../../store/actions/picture-action';
 
-const {changePicturePixelColor} = PICTURE_ACTION;
+const {changePicturePixelColor, togglePicturePixelColorful, setPicturePixelColorful} = PICTURE_ACTION;
 
 class PhotoFrame extends PureComponent {
 
@@ -18,9 +20,25 @@ class PhotoFrame extends PureComponent {
         frameHeight: 300,
     };
 
-    setColor = (x, y) => {
+    setPixel = (x, y) => {
+        switch (this.props.brushType) {
+            case brushes.PAINTBRUSH:
+                this.setColor(x, y, this.props.currentColor);
+                break;
+            case brushes.COLORFUL:
+                this.props.togglePicturePixelColorful(x, y);
+                break;
+            case brushes.ERASER:
+                this.setColor(x, y, config.current_color);
+                this.props.setPicturePixelColorful(x, y, false);
+                break;
+        }
+
+    };
+
+    setColor = (x, y, color) => {
         this.props.picture[x] && this.props.picture[x][y] && this.props.picture[x][y] !== this.props.currentColor &&
-        this.props.changePicturePixelColor(x, y, this.props.currentColor);
+        this.props.changePicturePixelColor(x, y, color);
     };
 
     onLayout = ({nativeEvent: {layout: {x, y, width, height}}}) => {
@@ -35,12 +53,13 @@ class PhotoFrame extends PureComponent {
     renderColorBoxes = () => {
         return this.props.picture
             .map((pictureCol, x) =>
-                pictureCol.map((color, y) => (
+                pictureCol.map((pixel, y) => (
                     <ColorBox size={this.state.size}
                               key={`${x}:${y}`}
                               id={`${x}:${y}`}
-                              color={color}
-                              onPress={this.setColor}
+                              color={pixel.color}
+                              isColorful={pixel.isColorful}
+                              onPress={this.setPixel}
                     />
                 ))
             )
@@ -50,7 +69,7 @@ class PhotoFrame extends PureComponent {
         const {size} = this.state;
         const boxX = Math.trunc(x / size);
         const boxY = Math.trunc(y / size);
-        this.setColor(boxX, boxY);
+        this.setPixel(boxX, boxY);
     };
 
     render() {
@@ -93,6 +112,7 @@ const mapStateToProps = state => ({
     columns: state.pictureReducer.columns,
     rows: state.pictureReducer.rows,
     picture: state.pictureReducer.picture,
+    brushType: state.brushReducer.brushType,
 });
 
 const mapDispatchToProps = dispatch => {
@@ -100,6 +120,12 @@ const mapDispatchToProps = dispatch => {
         changePicturePixelColor: (x, y, color) => {
             dispatch(changePicturePixelColor(x, y, color))
         },
+        togglePicturePixelColorful: (x, y) => {
+            dispatch(togglePicturePixelColorful(x, y))
+        },
+        setPicturePixelColorful: (x, y, isColorful) => {
+            dispatch(setPicturePixelColorful(x, y, isColorful))
+        }
     }
 };
 

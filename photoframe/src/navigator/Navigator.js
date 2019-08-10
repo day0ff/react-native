@@ -37,7 +37,7 @@ const Navigator = createDrawerNavigator(
         connection: ConnectionNavigator,
     },
     {
-        initialRouteName: 'connection',
+        initialRouteName: 'painter',
         drawerWidth: 200,
         contentOptions: {
             activeTintColor: 'black',

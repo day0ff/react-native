@@ -1,8 +1,9 @@
 {
   "root_key": "root_key",
   "color_palette_key": "color_palette_key",
-  "picture_key":"picture_key",
-  "current_color":"#000",
+  "picture_key": "picture_key",
+  "current_brush": "PAINTBRUSH",
+  "current_color": "#000",
   "color_palette_15": [
     "#C0F",
     "#F0C",
@@ -20,8 +21,8 @@
     "#00F",
     "#60F"
   ],
-  "picture":{
-    "columns":9,
-    "rows":12
+  "picture": {
+    "columns": 9,
+    "rows": 12
   }
 }
