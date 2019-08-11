@@ -40,7 +40,7 @@ const dynamicStyles = props => {
 
 const styles = StyleSheet.create({
     colorful: {
-        borderColor: 'red',
+        borderColor: 'black',
     },
     mono: {
         borderColor: 'white',

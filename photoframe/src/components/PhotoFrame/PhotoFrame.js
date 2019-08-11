@@ -30,10 +30,10 @@ class PhotoFrame extends PureComponent {
                 this.setColor(x, y, this.props.currentColor);
                 break;
             case brushes.COLORFUL:
-                this.props.setPicturePixelColorful(x, y, true);
+                this.setPicturePixelColorful(x, y, true);
                 break;
             case brushes.PIPETTE:
-                this.props.setCurrentColor(this.props.picture[x][y].color);
+                this.setCurrentColor(x, y);
                 break;
             case brushes.BUCKET:
                 const replaceColor = this.props.picture[x][y].color;
@@ -42,19 +42,30 @@ class PhotoFrame extends PureComponent {
                     .forEach(value => this.setColor(value.x, value.y, this.props.currentColor));
                 break;
             case brushes.COLORFUL_ERASER:
-                this.props.setPicturePixelColorful(x, y, false);
+                this.setPicturePixelColorful(x, y, false);
                 break;
             case brushes.ERASER:
                 this.setColor(x, y, config.current_color);
-                this.props.setPicturePixelColorful(x, y, false);
+                this.setPicturePixelColorful(x, y, false);
                 break;
         }
 
     };
 
+    checkArea = (x, y) => {
+        return this.props.picture[x] && this.props.picture[x][y] && this.props.picture[x][y] !== this.props.currentColor;
+    };
+
     setColor = (x, y, color) => {
-        this.props.picture[x] && this.props.picture[x][y] && this.props.picture[x][y] !== this.props.currentColor &&
-        this.props.changePicturePixelColor(x, y, color);
+        this.checkArea(x, y) && this.props.changePicturePixelColor(x, y, color);
+    };
+
+    setCurrentColor = (x, y) => {
+        this.checkArea(x, y) && this.props.setCurrentColor(this.props.picture[x][y].color);
+    };
+
+    setPicturePixelColorful = (x, y, colorful) => {
+        this.checkArea(x, y) && this.props.setPicturePixelColorful(x, y, colorful);
     };
 
     onLayout = ({nativeEvent: {layout: {x, y, width, height}}}) => {
