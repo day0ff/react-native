@@ -12,7 +12,7 @@ const {
 const changePictureRows = rows => ({type: CHANGE_PICTURE_ROWS, rows});
 const changePictureColumns = columns => ({type: CHANGE_PICTURE_COLUMNS, columns});
 const changePicturePixelColor = (x, y, color) => ({type: CHANGE_PICTURE_PIXEL_COLOR, x, y, color});
-const setPicturePixelColorful = (x, y, color) => ({type: SET_PICTURE_PIXEL_COLORFUL, x, y, color});
+const setPicturePixelColorful = (x, y, isColorful) => ({type: SET_PICTURE_PIXEL_COLORFUL, x, y, isColorful});
 const togglePicturePixelColorful = (x, y) => ({type: TOGGLE_PICTURE_PIXEL_COLORFUL, x, y});
 const clearPicture = (columns, rows) => ({type: CLEARER_PICTURE, columns, rows});
 

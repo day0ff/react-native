@@ -11,8 +11,10 @@ import ColorBox from '../common/ColorBox/ColorBox';
 import * as config from '../../config'
 import * as brushes from '../../misc/brushes'
 import { PICTURE_ACTION } from '../../store/actions/picture-action';
+import { CURRENT_COLOR_ACTION } from '../../store/actions/current-color-action';
 
 const {changePicturePixelColor, togglePicturePixelColorful, setPicturePixelColorful} = PICTURE_ACTION;
+const {setCurrentColor} = CURRENT_COLOR_ACTION;
 
 class PhotoFrame extends PureComponent {
 
@@ -28,7 +30,19 @@ class PhotoFrame extends PureComponent {
                 this.setColor(x, y, this.props.currentColor);
                 break;
             case brushes.COLORFUL:
-                this.props.togglePicturePixelColorful(x, y);
+                this.props.setPicturePixelColorful(x, y, true);
+                break;
+            case brushes.PIPETTE:
+                this.props.setCurrentColor(this.props.picture[x][y].color);
+                break;
+            case brushes.BUCKET:
+                const replaceColor = this.props.picture[x][y].color;
+                this.props.picture.map((column, x) => column.map((row, y) => ({...row, x, y})))
+                    .flatMap(value => value).filter(value => value.color === replaceColor)
+                    .forEach(value => this.setColor(value.x, value.y, this.props.currentColor));
+                break;
+            case brushes.COLORFUL_ERASER:
+                this.props.setPicturePixelColorful(x, y, false);
                 break;
             case brushes.ERASER:
                 this.setColor(x, y, config.current_color);
@@ -128,7 +142,10 @@ const mapDispatchToProps = dispatch => {
         },
         setPicturePixelColorful: (x, y, isColorful) => {
             dispatch(setPicturePixelColorful(x, y, isColorful))
-        }
+        },
+        setCurrentColor: (color) => {
+            dispatch(setCurrentColor(color))
+        },
     }
 };
 
