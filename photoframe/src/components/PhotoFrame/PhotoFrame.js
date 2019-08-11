@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import { View, StyleSheet } from 'react-native';
 
+import globalTiming from '../HOC/global-timing';
+
 import ColorBox from '../common/ColorBox/ColorBox';
 
 import * as config from '../../config'
@@ -60,6 +62,7 @@ class PhotoFrame extends PureComponent {
                               color={pixel.color}
                               isColorful={pixel.isColorful}
                               onPress={this.setPixel}
+                              globalTimingValue={this.props.globalTimingValue}
                     />
                 ))
             )
@@ -129,4 +132,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PhotoFrame);
+export default globalTiming(connect(mapStateToProps, mapDispatchToProps)(PhotoFrame));

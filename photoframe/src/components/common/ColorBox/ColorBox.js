@@ -17,7 +17,7 @@ class ColorBox extends PureComponent {
             ]}
                               onPress={this.onPress}
                               onLongPress={this.props.onLongPress}>
-                <Animated.View style={[styles.box, this.props.colorful]}>
+                <Animated.View style={[styles.box, this.props.isColorful && this.props.colorful]}>
                     <Text style={styles.text}>{this.props.children}</Text>
                 </Animated.View>
             </TouchableOpacity>
@@ -58,4 +58,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default  colorful(ColorBox);
+export default colorful(ColorBox);

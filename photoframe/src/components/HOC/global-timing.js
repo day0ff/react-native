@@ -28,13 +28,6 @@ function globalTiming(Component) {
         };
 
         render() {
-            // const range = new Array(config.animation.range + 1).fill(config.animation.range).map((range, index) => index / range);
-
-            // const globalTimingValue = this.globalTiming.interpolate({
-            //     inputRange: [...range],
-            //     outputRange: [...range]
-            // });
-
             return (
                 <Component globalTimingValue={this.globalTimingValue}
                            {...this.props}/>
