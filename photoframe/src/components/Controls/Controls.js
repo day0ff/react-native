@@ -26,9 +26,9 @@ class Controls extends Component {
         const picture = JSON.parse(JSON.stringify(this.props.picture));
         const array = picture
             .map((column, index) => index % 2 === 0 ? column : column.reverse())
-            .map(column => column.map(color => {
-                const hsv = toHsv(color);
-                return [Math.round(hsv.h * 255 / 360), Math.trunc(hsv.s * 255), Math.trunc(hsv.v * 255)].join(',');
+            .map(column => column.map(pixel => {
+                const hsv = toHsv(pixel.color);
+                return [Math.round(hsv.h * 255 / 360), Math.trunc(hsv.s * 255), Math.trunc(hsv.v * 255), pixel.isColorful ? 1 : 0].join(',');
             }).join(':'));
         BluetoothSerial.withDelimiter('\r').then(async () => {
             asyncForEach(array, async (array, index) => {
