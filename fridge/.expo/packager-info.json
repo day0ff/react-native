@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 6116,
+  "expoServerNgrokUrl": "https://ki-nv4.day0ff.fridge.exp.direct",
+  "packagerNgrokUrl": "https://packager.ki-nv4.day0ff.fridge.exp.direct",
+  "ngrokPid": 6146
 }
