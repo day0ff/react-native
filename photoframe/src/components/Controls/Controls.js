@@ -29,13 +29,26 @@ class Controls extends Component {
             .map(column => column.map(pixel => {
                 const hsv = toHsv(pixel.color);
                 return [Math.round(hsv.h * 255 / 360), Math.trunc(hsv.s * 255), Math.trunc(hsv.v * 255), pixel.isColorful ? 1 : 0].join(',');
-            }).join(':'));
-        BluetoothSerial.withDelimiter('\r').then(async () => {
-            asyncForEach(array, async (array, index) => {
-                await BluetoothSerial.write(`LINE#${index}[${array}:]\r\n`);
+            }).join(':'))
+            .map((column, index) => `LINE#${index}[${column}:]`)
+            .join('');
+        BluetoothSerial.withDelimiter('\r')
+            .then(async () => {
+                await BluetoothSerial.write(`PICTURE#\r\n`);
                 await new Promise(resolve => BluetoothSerial.on('read', resolve));
-            }).then(() => BluetoothSerial.write(`SHOW#\r\n`));
-        });
+            })
+            .then(async () => {
+                await BluetoothSerial.write(`${array}\r\n`);
+            })
+            .then(() => BluetoothSerial.write(`SHOW#\r\n`));
+        // await BluetoothSerial.write(`PICTURE#${array}\r\n`)
+        //     .then(() => BluetoothSerial.write(`SHOW#\r\n`));
+        // BluetoothSerial.withDelimiter('\r').then(async () => {
+        //     asyncForEach(array, async (array, index) => {
+        //         await BluetoothSerial.write(`LINE#${index}[${array}:]\r\n`);
+        //         await new Promise(resolve => BluetoothSerial.on('read', resolve));
+        //     }).then(() => BluetoothSerial.write(`SHOW#\r\n`));
+        // });
     };
 
     render() {
