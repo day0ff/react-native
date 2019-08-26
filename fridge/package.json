@@ -9,6 +9,7 @@
   "dependencies": {
     "@types/react-navigation": "^3.0.8",
     "expo": "^34.0.1",
+    "expo-google-app-auth": "^6.0.0",
     "firebase": "^6.4.0",
     "react": "16.8.3",
     "react-dom": "^16.8.6",

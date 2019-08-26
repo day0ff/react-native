@@ -14,7 +14,7 @@ export const config = {
     authDomain: 'day0ff-fridge.firebaseapp.com',
     databaseURL: 'https://day0ff-fridge.firebaseio.com',
     projectId: 'day0ff-fridge',
-    storageBucket: '',
+    storageBucket: 'day0ff-fridge.appspot.com',
     messagingSenderId: '298467520941',
     appId: '1:298467520941:web:c528cd0a9ebece1d',
   },
