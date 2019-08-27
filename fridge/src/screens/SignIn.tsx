@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Button, View } from 'react-native';
 import * as Google from 'expo-google-app-auth';
 import { GoogleLogInConfig } from 'expo-google-app-auth';
-import { config } from '../config'
+import { config } from '../configs/config'
 import firebase from 'firebase';
 
 const SignIn: React.FC = () => {
@@ -41,11 +41,9 @@ const SignIn: React.FC = () => {
               given_name: string,
               family_name: string
             };
-            console.log('sign in firebase', result.additionalUserInfo);
+            console.log('sign in firebase', result);
             return firebase.database()
               .ref('/users/' + result.user.uid)
-              // .ref()
-              // .child('object')
               .set({
                 gmail: result.user.email,
                 profile_picture: profile.picture,

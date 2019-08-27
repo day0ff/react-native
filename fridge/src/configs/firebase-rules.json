@@ -1,0 +1,19 @@
+{
+  "rules": {
+    "rights": {
+      ".read": "auth != null && auth.provider == 'google' && root.child('rights/admins').child(auth.uid).val() == true",
+      ".write": "auth != null && auth.provider == 'google' && root.child('rights/admins').child(auth.uid).val() == true",
+      "admins": {
+        ".validate": "newData.child(auth.uid).isBoolean()"
+      },
+      "users": {
+        ".validate": "newData.child(auth.uid).isBoolean()"
+      }
+    },
+    "users": {
+      ".read": "auth != null && auth.provider == 'google' && root.child('rights/admins').child(auth.uid).val() == true",
+      ".write": "auth != null && auth.provider == 'google'",
+      ".validate": "newData.child(auth.uid).hasChildren(['gmail', 'profile_picture', 'first_name', 'last_name']) && newData.child(auth.uid).child('gmail').isString() && newData.child(auth.uid).child('profile_picture').isString() && newData.child(auth.uid).child('first_name').isString() && newData.child(auth.uid).child('last_name').isString()"
+    }
+  }
+}
